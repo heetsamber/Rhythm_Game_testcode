@@ -2,6 +2,10 @@ package dynamic_beat;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 
 public class DynamicBeat extends JFrame {
 
@@ -11,6 +15,9 @@ public class DynamicBeat extends JFrame {
     private Image introBackground = new ImageIcon(Main.class.getResource("../images/background.jpg")).getImage();;
     private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/menubar.png")));
     private JButton exitButton = new JButton(new ImageIcon(Main.class.getResource("../images/exitButton.png")));
+
+
+    private int mouseX, mouseY;
 
     public DynamicBeat(){
         setTitle("Dynamic Beat");
@@ -25,6 +32,23 @@ public class DynamicBeat extends JFrame {
 
         // 메뉴바 초기화
         menuBar.setBounds(0, 0, 1280, 30);
+        // 마우스 좌표 계산
+        menuBar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        });
+        // 메뉴바를 잡고 윈도우 전체를 이동하기 위한 메서드
+        menuBar.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int x = e.getXOnScreen();
+                int y = e.getYOnScreen();
+                setLocation(x - mouseX, y - mouseY);
+            }
+        });
         add(menuBar);
 
         // 닫기버튼 초기화
