@@ -40,7 +40,7 @@ public class DynamicBeat extends JFrame {
                 mouseY = e.getY();
             }
         });
-        // 메뉴바를 잡고 윈도우 전체를 이동하기 위한 메서드
+        // 메뉴바를 잡고 윈도우 전체를 이동하기 위한 이벤트
         menuBar.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
