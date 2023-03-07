@@ -14,7 +14,7 @@ public class DynamicBeat extends JFrame {
     private Graphics screenGraphic;
     private Image introBackground = new ImageIcon(Main.class.getResource("../images/background.jpg")).getImage();;
     private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/menubar.png")));
-    private JButton exitButton = new JButton(new ImageIcon(Main.class.getResource("../images/exitButton.png")));
+    private JButton exitButton = new JButton(new ImageIcon(Main.class.getResource("../images/exitButtonBasic.png")));
 
 
     private int mouseX, mouseY;
