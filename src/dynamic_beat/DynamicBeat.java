@@ -9,12 +9,15 @@ import java.awt.event.MouseMotionListener;
 
 public class DynamicBeat extends JFrame {
 
-    // 배경 관련 필드
     private Image screenImage;
     private Graphics screenGraphic;
+
+    private ImageIcon exitButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/exitButtonEnter.png"));
+    private ImageIcon exitButtonBasicImage = new ImageIcon(Main.class.getResource("../images/exitButtonBasic.png"));
+
     private Image introBackground = new ImageIcon(Main.class.getResource("../images/background.jpg")).getImage();;
     private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/menubar.png")));
-    private JButton exitButton = new JButton(new ImageIcon(Main.class.getResource("../images/exitButtonBasic.png")));
+    private JButton exitButton = new JButton(exitButtonBasicImage);
 
 
     private int mouseX, mouseY;
@@ -29,6 +32,28 @@ public class DynamicBeat extends JFrame {
         setVisible(true);
         setBackground(new Color(0, 0, 0, 0));
         setLayout(null);
+
+        // 닫기버튼 초기화
+        exitButton.setBounds(1245, 0, 30, 30);
+        exitButton.setBorderPainted(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setFocusPainted(false);
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                exitButton.setIcon(exitButtonEnteredImage);
+            }
+            @Override
+            public void mouseExited(MouseEvent e){
+                exitButton.setIcon(exitButtonBasicImage);
+            }
+            @Override
+            public void mousePressed(MouseEvent e){
+                System.exit(0);
+            }
+
+        });
+        add(exitButton);
 
         // 메뉴바 초기화
         menuBar.setBounds(0, 0, 1280, 30);
@@ -51,12 +76,6 @@ public class DynamicBeat extends JFrame {
         });
         add(menuBar);
 
-        // 닫기버튼 초기화
-        exitButton.setBounds(50, 50, 30, 30);
-        exitButton.setBorderPainted(false);
-        exitButton.setContentAreaFilled(false);
-        exitButton.setFocusPainted(false);
-        add(exitButton);
 
         // 이미지 크기를 스크린에 맞게 변환
         introBackground = introBackground.getScaledInstance(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT, Image.SCALE_SMOOTH);
